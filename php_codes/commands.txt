@@ -1,0 +1,58 @@
+CREATE DATABASE attendance_system DEFAULT CHARACTER SET utf8;
+GRANT ALL ON attendance_system.* TO 'admin'@'localhost' IDENTIFIED BY 'admin123';
+GRANT ALL ON attendance_system.* TO 'admin'@'127.0.0.1' IDENTIFIED BY 'admin123';
+
+CREATE TABLE Admin (
+  a_id VARCHAR(255) NOT NULL,
+  a_name VARCHAR(255),
+  a_pw VARCHAR(255),
+  PRIMARY KEY(a_id)
+) ENGINE = InnoDB;
+
+CREATE TABLE Teacher (
+  t_id VARCHAR(255) NOT NULL,
+  t_name VARCHAR(255),
+  t_pw VARCHAR(255),
+  PRIMARY KEY(t_id)
+) ENGINE = InnoDB;
+
+insert into admin values ("a1","Daisy","1b74837c4b45bdc37c79aa6c9ac4b7bc"); //hash value of "admin123" pw
+insert into admin values ("a2","Dattatreya","a33fc0f4540934e87a77c0842a2d1ae7"); //hash value of "kanha123" pw
+
+teacher manual id: bkp pw: allclear
+an nandya
+sp pynes
+ksb babuks
+pmk pmkhilar
+
+CREATE TABLE courses (
+c_id VARCHAR(255) NOT NULL,
+c_name VARCHAR(255),
+c_rfid VARCHAR(20),
+t_id VARCHAR(255) NOT NULL,
+CONSTRAINT FOREIGN KEY (t_id) REFERENCES teacher (t_id)
+ON DELETE CASCADE ON UPDATE CASCADE,
+PRIMARY KEY (c_id)
+) ENGINE=InnoDB CHARACTER SET=utf8;
+
+
+//SELECT c_id, c_name, c_rfid, t_id, t_name FROM courses JOIN teacher ON courses.t_id=teacher.t_id;
+
+CREATE TABLE Students (
+  s_id VARCHAR(255) NOT NULL,
+  s_name VARCHAR(255),
+  s_rfid VARCHAR(20),
+  PRIMARY KEY(s_id)
+) ENGINE = InnoDB;
+
+CREATE TABLE att (
+s_id VARCHAR(255) NOT NULL,
+d1 enum('0','1') DEFAULT '0',
+d2 enum('0','1') DEFAULT '0',
+CONSTRAINT FOREIGN KEY (s_id) REFERENCES users (user_id)
+ON DELETE CASCADE ON UPDATE CASCADE,
+PRIMARY KEY (s_id)
+) ENGINE=InnoDB CHARACTER SET=utf8;
+
+
+//UPDATE `course_cs100_table` SET `d1`='1',`d2`='1',`d3`='0' WHERE s_id="715cs1057"
