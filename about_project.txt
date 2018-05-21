@@ -1,0 +1,1 @@
+This folder contains php and arduino codes to interface nodemcu with phpmyadmin and xampp server for online attendance upload on rfid verification.
